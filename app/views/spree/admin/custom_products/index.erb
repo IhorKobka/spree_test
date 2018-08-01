@@ -1,0 +1,38 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Spree::CustomProduct) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Spree.t(:new_product), new_object_url, { class: "btn-success", icon: 'add', id: 'admin_new_product' } %>
+<% end if can?(:create, Spree::CustomProduct) %>
+
+<% if @collection.any? %>
+  <table class="table" id="listing_products">
+    <thead>
+    <tr data-hook="admin_products_index_headers">
+      <th colspan="2"><%= Spree.t(:name) %></th>
+      <th><%= Spree.t(:category) %></th>
+      <th data-hook="admin_products_index_header_actions" class="actions"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @collection.each do |product| %>
+      <tr id="<%= spree_dom_id product %>" data-hook="admin_products_index_rows" class="<%= cycle('odd', 'even') %>">
+        <td class="image"><%= image_tag main_app.url_for(product.catalog_image&.url(:small)) %></td>
+        <td><%= link_to product.try(:name), edit_admin_custom_product_path(product) %></td>
+        <td class="category"><%= product.category.name %> </td>
+        <td class="actions actions-3 text-right" data-hook="admin_products_index_row_actions">
+          <%= link_to_edit product, no_text: true, class: 'edit' if can?(:edit, product) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Product)) %>,
+    <%= link_to Spree.t(:add_one), new_object_url if can?(:create, Spree::Product) %>!
+  </div>
+<% end %>
+
+<%#= render partial: 'spree/admin/shared/index_table_options', locals: { collection: @collection } %>

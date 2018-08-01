@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_01_084204) do
+ActiveRecord::Schema.define(version: 2018_08_01_085900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,6 +161,14 @@ ActiveRecord::Schema.define(version: 2018_08_01_084204) do
     t.integer "pos", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "spree_custom_products", force: :cascade do |t|
+    t.string "name", limit: 100, null: false
+    t.bigint "spree_custom_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["spree_custom_category_id"], name: "index_spree_custom_products_on_spree_custom_category_id"
   end
 
   create_table "spree_customer_returns", id: :serial, force: :cascade do |t|
@@ -1087,4 +1095,5 @@ ActiveRecord::Schema.define(version: 2018_08_01_084204) do
     t.index ["kind"], name: "index_spree_zones_on_kind"
   end
 
+  add_foreign_key "spree_custom_products", "spree_custom_categories"
 end

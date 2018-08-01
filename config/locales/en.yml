@@ -31,3 +31,6 @@
 
 en:
   hello: "Hello world"
+  spree:
+    custom_products: Custom Products
+    custom_categories: Custom Categories
