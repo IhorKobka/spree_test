@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'spree', '~> 3.6.1'
 gem 'spree_auth_devise', '~> 3.3'
 gem 'spree_gateway', '~> 3.3'
+
 gem 'pry-rails', '~> 0.3.6'
 
 # Reduces boot times through caching; required in config/boot.rb

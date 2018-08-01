@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_31_110310) do
+ActiveRecord::Schema.define(version: 2018_08_01_084204) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,14 @@ ActiveRecord::Schema.define(version: 2018_07_31_110310) do
     t.index ["address_id"], name: "index_spree_credit_cards_on_address_id"
     t.index ["payment_method_id"], name: "index_spree_credit_cards_on_payment_method_id"
     t.index ["user_id"], name: "index_spree_credit_cards_on_user_id"
+  end
+
+  create_table "spree_custom_categories", force: :cascade do |t|
+    t.bigint "parent_id"
+    t.string "name", limit: 50, null: false
+    t.integer "pos", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "spree_customer_returns", id: :serial, force: :cascade do |t|
